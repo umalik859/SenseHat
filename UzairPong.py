@@ -1,16 +1,26 @@
 from sense_hat import SenseHat
 from time import sleep
+from random import choice
+
 sense = SenseHat()
 
 white = (255, 255, 255)
 blue = (0, 0, 255)
 green = (0, 255, 0)
+red = (255, 0, 0)
 
 
 bat_y = 4
 ball_position = [3,3]
 ball_velocity = [1,1]
 total = 0
+
+sense.show_message("What Will Be Your Highscore?", text_colour=green, scroll_speed=0.06)
+
+for i in range(5, -1, -1):
+        sense.show_letter(str(i), red)
+        sleep(1)
+        
 
 # Functions
 def draw_bat():
@@ -40,20 +50,25 @@ def draw_ball():
         ball_velocity[0] = -ball_velocity[0]
         total = total + 1
     if ball_position[0] == 0:
-        sense.show_message("Game Over", text_colour = green, back_colour = blue)
+        sense.show_message("Game Over", text_colour = green)
         sense.show_message(str(total), text_colour = blue, back_colour = green)
-
-    
+def ball_reset():
+    if ball_position[0] == 0 and not (bat_y - 1) <= ball_position[1] <= (bat_y + 1):
+        ball_position[0] == 3
+        ball_position[1] == 3
     
 
 # Main program
 while True:
     draw_bat()
-    sleep(0.5)
+    sleep(0.3)
     sense.stick.direction_up = move_up
     sense.clear(0, 0, 0)
     sense.stick.direction_down = move_down
     draw_ball()
     print (total)
+    ball_reset()
     
+
+
 
