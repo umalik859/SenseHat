@@ -50,7 +50,7 @@ def draw_ball():
         ball_velocity[0] = -ball_velocity[0]
         total = total + 1
     if ball_position[0] == 0:
-        sense.show_message("Game Over", text_colour = green)
+        sense.show_message("Game Over", scroll_speed = 0.08, text_colour = green)
         sense.show_message(str(total), text_colour = blue, back_colour = green)
 def ball_reset():
     if ball_position[0] == 0 and not (bat_y - 1) <= ball_position[1] <= (bat_y + 1):
@@ -69,6 +69,5 @@ while True:
     print (total)
     ball_reset()
     
-
-
+    
 
